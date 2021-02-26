@@ -1,10 +1,9 @@
 import './App.css';
-import {Layout, Menu, Switch} from 'antd';
+import {Layout, Menu} from 'antd';
 import 'antd/dist/antd.css'
 import React from 'react';
-import {NavLink, Route, withRouter} from 'react-router-dom';
+import {NavLink, Route} from 'react-router-dom';
 import Login from "./components/login/Login";
-import TryLogin from "./components/login/tryLogin";
 
 const {Header, Content, Sider, Footer} = Layout;
 
@@ -38,7 +37,7 @@ function App() {
                     </Sider>
                     <Content style={{padding: '0 24px', minHeight: 280}}>
 
-                        <Route path='/login' render={() => <TryLogin/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
 
 
                     </Content>

@@ -1,6 +1,6 @@
-import {Action, applyMiddleware,  createStore, compose, combineReducers } from "redux"
+import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux"
 import authReducer from "./auth-reducer";
-import middleware, { ThunkAction } from 'redux-thunk'
+import middleware, {ThunkAction} from 'redux-thunk'
 
 const globalReducer = combineReducers({
     auth: authReducer

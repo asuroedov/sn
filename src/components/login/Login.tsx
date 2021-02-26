@@ -1,53 +1,73 @@
-import {ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
-import React from 'react'
+import {Button, Checkbox, Form, Input} from 'antd';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux'
+import {Redirect} from 'react-router-dom';
+import {loginTC} from "../../data/auth-reducer";
+import {AppStateType} from "../../data/store";
 
-type LoginDataType = {
-    login: string
+const layout = {
+    labelCol: {span: 8},
+    wrapperCol: {span: 16},
+};
+const tailLayout = {
+    wrapperCol: {offset: 8, span: 16},
+};
+
+type FormDataType = {
+    username: string
     password: string
+    remember: boolean
 }
-const Login: React.FC = () => {
-    return(
-        <div>
-            <Formik
-                initialValues={{ login: '', password: '' }}
-                //validate={}
-                onSubmit={submit}
+const Login = () => {
+
+    const token = useSelector((state: AppStateType )=> state.auth.token)
+    const dispatch = useDispatch()
+
+    const onFinish = (values: FormDataType) => {
+        dispatch(loginTC(values.username, values.password))
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo);
+    };
+
+    if (!!token) return <Redirect to='/'/>
+
+    return (
+        <Form
+            {...layout}
+            name="basic"
+            initialValues={{remember: true}}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+        >
+            <Form.Item
+                label="Username"
+                name="username"
+                rules={[{required: true, message: 'Please input your username!'}]}
             >
-                {({ isSubmitting }) => (
-                    <Form>
-                        <Field type="text" name="login" />
-                        <ErrorMessage name="login" component="div" />
-                        <Field type="password" name="password" />
-                        <ErrorMessage name="password" component="div" />
-                        <button type="submit" disabled={isSubmitting}>
-                            Войти
-                        </button>
-                    </Form>
-                )}
-            </Formik>
-        </div>
-    )
-}
+                <Input/>
+            </Form.Item>
 
-const submit = (values: LoginDataType, { setSubmitting }: {setSubmitting:(f: boolean) => void}) => {
+            <Form.Item
+                label="Password"
+                name="password"
+                rules={[{required: true, message: 'Please input your password!'}]}
+            >
+                <Input.Password/>
+            </Form.Item>
 
+            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                <Checkbox>Remember me</Checkbox>
+            </Form.Item>
 
-    setSubmitting(false)
-}
-/*
-const validator = (values ) => {
-    values => {
-        const errors = {};
-        if (!values.login) {
-            //errors.login = 'Required';
-        } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-            errors.email = 'Invalid email address';
-        }
-        return errors;
-    }
-}*/
+            <Form.Item {...tailLayout}>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
+            </Form.Item>
+        </Form>
+    );
+};
 
 export default Login
-
