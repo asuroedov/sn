@@ -19,20 +19,26 @@ const authReducer = (state: InitialStateType = initialState, actions: ActionsTyp
             return {...state, token: actions.token}
             break
 
+        case 'auth-reducer/setAuthDate':
+            return {...state, ...actions.data}
+            break
+
         default:
             return state
     }
 }
 
 export const actions = {
-    setTokenAC: (token: string) => ({type: 'auth-reducer/setToken', token})
+    setTokenAC: (token: string) => ({type: 'auth-reducer/setToken', token} as const),
+    setAuthDate: (data: InitialStateType) => ({type: 'auth-reducer/setAuthDate', data} as const)
 }
 
 export const loginTC = (login: string, password: string): CommonThunkType<ActionsType> => {
     return async (dispatch) => {
         const response = await AuthAPI.login(login, password)
         if (response.data.resultCode === ResponseCodes.Success) {
-            dispatch(actions.setTokenAC(response.data.data.token))
+            dispatch(actions.setAuthDate({userId: response.data.data.userId, login: response.data.data.login, token: response.data.data.token,  isAuth: true}))
+            localStorage.setItem('token', response.data.data.token)
         }
     }
 }
