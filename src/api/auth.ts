@@ -1,9 +1,12 @@
-import {instance} from "./api";
+import {BASE_URL} from "./api";
+import axios from "axios";
 
 type LoginResponseType = {
     resultCode: number
     message: string
     data: {
+        userId: number
+        login: string
         token: string
     }
 }
@@ -13,6 +16,9 @@ export const AuthAPI = {
         return 42
     },
     login: (login: string, password: string) => {
-        return instance.post<LoginResponseType>(`/login`, {login, password})
+        return axios.post<LoginResponseType>(BASE_URL + `/login`, {login, password})
+    },
+    me: (token: string) => {
+        return axios.get<LoginResponseType>(BASE_URL + '/login', {headers: {token: token}})
     }
 }

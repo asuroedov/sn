@@ -43,6 +43,14 @@ export const loginTC = (login: string, password: string): CommonThunkType<Action
     }
 }
 
+export const getUserDataTC = (token: string): CommonThunkType<ActionsType> => {
+    return async (dispatch) => {
+        const response = await AuthAPI.me(token)
+        if(response.data.resultCode === ResponseCodes.Success){
+            dispatch(actions.setAuthDate({userId: response.data.data.userId, login: response.data.data.login, token: response.data.data.token,  isAuth: true}))
+        }
+    }
+}
 
 export default authReducer
 
