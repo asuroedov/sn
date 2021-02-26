@@ -52,5 +52,15 @@ export const getUserDataTC = (token: string): CommonThunkType<ActionsType> => {
     }
 }
 
+export const logoutTC = (): CommonThunkType<ActionsType> => {
+    return async (dispatch) => {
+        //const response = await AuthAPI.logout()
+        //if (response.data.resultCode === ResponseCodes.Success) {
+            dispatch(actions.setAuthDate({userId: null, login: null, token: null,  isAuth: false}))
+            localStorage.removeItem('token')
+        //}
+    }
+}
+
 export default authReducer
 

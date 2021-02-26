@@ -11,3 +11,6 @@ export enum ResponseCodes{
     Success= 0,
     Error = 1
 }
+
+export let TOKEN = null as string | null
+export const setTOKEN = (token: string) => (TOKEN = token)

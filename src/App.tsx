@@ -8,6 +8,7 @@ import ProfilePage from "./components/profile/profilePage";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "./data/store";
 import {initializeTC} from "./data/init-reducer";
+import {logoutTC} from "./data/auth-reducer";
 
 const {Header, Content, Sider, Footer} = Layout;
 
@@ -45,6 +46,7 @@ function App() {
                             <Menu.Item key="3">Друзья</Menu.Item>
                             <Menu.Item key="4">Пользователи</Menu.Item>
                             <Menu.Item key="5"><NavLink to={'/login'}>Login</NavLink></Menu.Item>
+                            <Menu.Item key="6" onClick={(e) => {dispatch(logoutTC())}}><NavLink to={'/login'}>Logout</NavLink></Menu.Item>
                         </Menu>
                     </Sider>
                     <Content style={{padding: '0 24px', minHeight: 280}}>
