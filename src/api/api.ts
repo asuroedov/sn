@@ -7,6 +7,7 @@ export const instance = axios.create({
 */
 
 export const BASE_URL = 'http://localhost:5000'
+//export const BASE_URL = 'http://a.suroedov.fvds.ru:5000'
 export enum ResponseCodes{
     Success= 0,
     Error = 1
@@ -14,3 +15,8 @@ export enum ResponseCodes{
 
 export let TOKEN = null as string | null
 export const setTOKEN = (token: string) => (TOKEN = token)
+
+
+
+// @ts-ignore
+window.TOKEN = () => TOKEN

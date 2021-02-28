@@ -1,19 +1,41 @@
-import React from "react";
-import {useSelector} from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory, useParams} from "react-router-dom";
 import {AppStateType} from "../../data/store";
+import {getProfileInfoTC} from "../../data/profile-reducer";
 
 
 const ProfilePage: React.FC = () => {
 
-    const userId = useSelector((state: AppStateType) => state.auth.userId)
-    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
-    const login = useSelector((state: AppStateType) => state.auth.login)
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const params = useParams<{ userId: string | undefined }>()
+    const currentUserId = useSelector((state: AppStateType) => state.auth.userId)
+    let pageUserId = null
 
-    return(
+    useEffect(() => {
+        pageUserId = params.userId ? +params.userId : currentUserId
+        if (!pageUserId) {
+            history.push('/login')
+        } else {
+            dispatch(getProfileInfoTC(pageUserId))
+        }
+
+    }, [])
+
+    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
+    const userId = useSelector((state: AppStateType) => state.profile.userId)
+    const login = useSelector((state: AppStateType) => state.profile.login)
+    const status = useSelector((state: AppStateType) => state.profile.status)
+    const photoUrl = useSelector((state: AppStateType) => state.profile.photoUrl)
+
+    return (
         <div>
-            <div>{userId}</div>
             <div>{String(isAuth)}</div>
-            <div>{login}</div>
+            <div>userId: {userId}</div>
+            <div>Login: {login}</div>
+            <div>Status: {status}</div>
+            <div>Photo url: {photoUrl}</div>
         </div>
     )
 }
