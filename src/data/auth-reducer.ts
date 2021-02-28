@@ -1,6 +1,6 @@
 import {CommonThunkType, InferActionsTypes} from "./store";
 import {AuthAPI} from "../api/auth";
-import {ResponseCodes} from "../api/api";
+import {ResponseCodes, setTOKEN} from "../api/api";
 
 const initialState = {
     userId: null as null | number,
@@ -39,6 +39,7 @@ export const loginTC = (login: string, password: string): CommonThunkType<Action
         if (response.data.resultCode === ResponseCodes.Success) {
             dispatch(actions.setAuthDate({userId: response.data.data.userId, login: response.data.data.login, token: response.data.data.token,  isAuth: true}))
             localStorage.setItem('token', response.data.data.token)
+            setTOKEN(response.data.data.token)
         }
     }
 }
@@ -58,6 +59,7 @@ export const logoutTC = (): CommonThunkType<ActionsType> => {
         //if (response.data.resultCode === ResponseCodes.Success) {
             dispatch(actions.setAuthDate({userId: null, login: null, token: null,  isAuth: false}))
             localStorage.removeItem('token')
+            setTOKEN('')
         //}
     }
 }

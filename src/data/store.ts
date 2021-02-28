@@ -2,10 +2,12 @@ import {Action, applyMiddleware, combineReducers, compose, createStore} from "re
 import authReducer from "./auth-reducer";
 import middleware, {ThunkAction} from 'redux-thunk'
 import initReducer from "./init-reducer";
+import profileReducer from "./profile-reducer";
 
 const globalReducer = combineReducers({
     auth: authReducer,
-    init: initReducer
+    init: initReducer,
+    profile: profileReducer
 });
 
 

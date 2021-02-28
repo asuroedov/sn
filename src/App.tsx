@@ -52,7 +52,7 @@ function App() {
                     <Content style={{padding: '0 24px', minHeight: 280}}>
 
                         <Route path='/login' render={() => <Login/>}/>
-                        <Route path='/profile' render={() => <ProfilePage/>}/>
+                        <Route path='/profile/:userId?' render={() => <ProfilePage/>}/>
 
 
                     </Content>
