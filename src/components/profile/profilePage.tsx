@@ -4,6 +4,8 @@ import {useHistory, useParams} from "react-router-dom";
 import {AppStateType} from "../../data/store";
 import {getProfileInfoTC, setProfileAvatarTC} from "../../data/profile-reducer";
 import {Image} from 'antd';
+import defaultAvatarImg from '../../user.png'
+import {BASE_URL} from "../../api/api";
 
 
 const ProfilePage: React.FC = () => {
@@ -14,7 +16,10 @@ const ProfilePage: React.FC = () => {
     const currentUserId = useSelector((state: AppStateType) => state.auth.userId)
     let pageUserId = null
 
+
+    const photoUrl = useSelector((state: AppStateType) => state.profile.photoUrl)
     useEffect(() => {
+
         pageUserId = params.userId ? +params.userId : currentUserId
         if (!pageUserId) {
             history.push('/login')
@@ -24,14 +29,15 @@ const ProfilePage: React.FC = () => {
 
     }, [])
 
+
     const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
     const userId = useSelector((state: AppStateType) => state.profile.userId)
     const login = useSelector((state: AppStateType) => state.profile.login)
     const status = useSelector((state: AppStateType) => state.profile.status)
-    const photoUrl = useSelector((state: AppStateType) => state.profile.photoUrl)
 
-    const fileSelected = (e:ChangeEvent<HTMLInputElement>) => {
-        if(e.target.files && e.target.files.length > 0)
+
+    const fileSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0)
             dispatch(setProfileAvatarTC(e.target.files[0]))
     }
     return (
@@ -39,8 +45,7 @@ const ProfilePage: React.FC = () => {
 
             <Image
                 width={200}
-                //src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                src="http://localhost:5000/photo/1"
+                src={photoUrl ? BASE_URL + photoUrl : defaultAvatarImg}
             />
 
             <input onChange={fileSelected} type={'file'}/>
@@ -49,7 +54,7 @@ const ProfilePage: React.FC = () => {
             <div>userId: {userId}</div>
             <div>Login: {login}</div>
             <div>Status: {status}</div>
-            <div>Photo url: {photoUrl}</div>
+            <div>hasPhoto: {photoUrl}</div>
         </div>
     )
 }
