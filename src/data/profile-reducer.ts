@@ -44,4 +44,12 @@ export const getProfileInfoTC = (userId: number):CommonThunkType<ActionsType> =>
         }
     }
 }
+
+export const setProfileAvatarTC = (file: File):CommonThunkType<ActionsType> => {
+    return async (dispatch) => {
+        const response = await ProfileAPI.uploadProfileAvatar(file)
+
+    }
+}
+
 export default profileReducer

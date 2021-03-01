@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useParams} from "react-router-dom";
 import {AppStateType} from "../../data/store";
-import {getProfileInfoTC} from "../../data/profile-reducer";
+import {getProfileInfoTC, setProfileAvatarTC} from "../../data/profile-reducer";
+import {Image} from 'antd';
 
 
 const ProfilePage: React.FC = () => {
@@ -29,8 +30,21 @@ const ProfilePage: React.FC = () => {
     const status = useSelector((state: AppStateType) => state.profile.status)
     const photoUrl = useSelector((state: AppStateType) => state.profile.photoUrl)
 
+    const fileSelected = (e:ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files && e.target.files.length > 0)
+            dispatch(setProfileAvatarTC(e.target.files[0]))
+    }
     return (
         <div>
+
+            <Image
+                width={200}
+                //src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                src="http://localhost:5000/photo/1"
+            />
+
+            <input onChange={fileSelected} type={'file'}/>
+
             <div>{String(isAuth)}</div>
             <div>userId: {userId}</div>
             <div>Login: {login}</div>
