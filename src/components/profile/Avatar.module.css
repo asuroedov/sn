@@ -1,0 +1,44 @@
+
+.wrapperImg{
+    width: 250px;
+    height: 250px;
+    position: relative;
+}
+
+
+.wrapperMenu{
+    display: none;
+    position: absolute;
+    bottom: 0px;
+
+    width: 250px;
+    height: 70px;
+    background-color: black;
+    opacity: 0.6;
+
+}
+
+.wrapperMenu__update{
+    display: inline-block;
+    width: 100%;
+    position: relative;
+
+    text-align: center;
+    color: white;
+}
+
+.wrapperMenu__file {
+    opacity: 0.0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height:100%;
+}
+/*hovered*/
+
+.wrapperMenu.hovered{
+    display: block;
+}
