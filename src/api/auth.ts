@@ -18,11 +18,11 @@ type DeleteResponseType = {
 }
 
 export const AuthAPI = {
-    regist: () => {
+    registration: () => {
         return 42
     },
-    login: (login: string, password: string) => {
-        return axios.post<LoginResponseType>(BASE_URL + `/login`, {login, password})
+    login: (login: string, password: string, name: string) => {
+        return axios.post<LoginResponseType>(BASE_URL + `/login`, {login, password, name})
     },
     logout: () => {
         return axios.delete<DeleteResponseType>(BASE_URL + `/login`, {headers: {token: TOKEN}})
