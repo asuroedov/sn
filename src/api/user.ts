@@ -5,6 +5,7 @@ export type UserType = {
     name: string
     shortName: string
     photoUrl: string
+    userId: number
 }
 
 type UserResponseType = {

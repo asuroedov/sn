@@ -18,7 +18,11 @@ const UsersPage: React.FC<PropsType> = (props) => {
     }, [])
     return (
         <div>
-            {users.map((el, index) => <User key={'' + index + el.name } photoUrl={el.photoUrl} name={el.name} shortName={el.shortName}/>)}
+            {users.map((el, index) => <User key={ el.userId }
+                                            userId={el.userId}
+                                            photoUrl={el.photoUrl}
+                                            name={el.name}
+                                            shortName={el.shortName}/>)}
         </div>
     )
 }
