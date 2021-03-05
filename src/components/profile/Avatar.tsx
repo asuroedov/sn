@@ -28,6 +28,7 @@ const Avatar: React.FC<{photoUrl: string}> = (props) => {
         <div className={s.container}>
             <div onMouseOver={mousePointed} onMouseOut={mouseOuted} className={s.wrapperImg}>
                 <Image
+                    className={s.image}
                     width={250}
                     height={250}
                     src={props.photoUrl ? BASE_URL + props.photoUrl : defaultAvatarImg}

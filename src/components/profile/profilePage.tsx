@@ -1,15 +1,16 @@
-import React, {ChangeEvent, useEffect} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useParams} from "react-router-dom";
 import {AppStateType} from "../../data/store";
-import {getProfileInfoTC, setProfileAvatarTC} from "../../data/profile-reducer";
-import {Image} from 'antd';
-import defaultAvatarImg from '../../user.png'
-import {BASE_URL} from "../../api/api";
+import {getProfileInfoTC} from "../../data/profile-reducer";
+import Avatar from "./Avatar";
+import ProfileInfo from "./ProfileInfo";
+import s from './profilePage.module.css'
 
 
 const ProfilePage: React.FC = () => {
 
+    debugger
     const dispatch = useDispatch()
     const history = useHistory()
     const params = useParams<{ userId: string | undefined }>()
@@ -34,27 +35,18 @@ const ProfilePage: React.FC = () => {
     const userId = useSelector((state: AppStateType) => state.profile.userId)
     const login = useSelector((state: AppStateType) => state.profile.login)
     const status = useSelector((state: AppStateType) => state.profile.status)
+    const name = useSelector((state: AppStateType) => state.profile.name)
+    const lastSeanceDate = useSelector((state: AppStateType) => state.profile.lastSeanceDate)
+    const location = useSelector((state: AppStateType) => state.profile.location)
 
 
-    const fileSelected = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0)
-            dispatch(setProfileAvatarTC(e.target.files[0]))
-    }
     return (
-        <div>
+        <div className={s.container}>
 
-            <Image
-                width={200}
-                src={photoUrl ? BASE_URL + photoUrl : defaultAvatarImg}
-            />
+            <Avatar photoUrl={photoUrl}></Avatar>
+            <ProfileInfo status={status} name={name} lastSeanceDate={lastSeanceDate} location={location}></ProfileInfo>
 
-            <input onChange={fileSelected} type={'file'}/>
 
-            <div>{String(isAuth)}</div>
-            <div>userId: {userId}</div>
-            <div>Login: {login}</div>
-            <div>Status: {status}</div>
-            <div>hasPhoto: {photoUrl}</div>
         </div>
     )
 }
