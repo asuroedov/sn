@@ -23,7 +23,7 @@ function App() {
     if(!isInit) return (<div>Loading...</div>)
 
     return (
-        <Layout style={{height: "100vh"}}>
+        <Layout >
 
             <Header style={{backgroundColor: 'white'}}>
                 <div className="logo"/>
@@ -35,12 +35,11 @@ function App() {
             <Content style={{padding: '0 50px'}}>
 
                 <Layout className="site-layout-background" style={{padding: '24px 0'}}>
-                    <Sider className="site-layout-background" width={200}>
+                    <Sider className="site-layout-background" width={200}  style={{height: '325px', backgroundColor: 'white'}}>
                         <Menu
                             mode="inline"
                             defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
-                            style={{height: '100%', backgroundColor: 'white'}}
+                            style={{height: '325px', backgroundColor: 'white'}}
                         >
                             <Menu.Item key="1"><NavLink to={'/profile'}>Профиль</NavLink></Menu.Item>
                             <Menu.Item key="2">Сообщения</Menu.Item>
@@ -50,17 +49,14 @@ function App() {
                             <Menu.Item key="6" onClick={(e) => {dispatch(logoutTC())}}><NavLink to={'/login'}>Logout</NavLink></Menu.Item>
                         </Menu>
                     </Sider>
-                    <Content style={{padding: '0 24px', minHeight: 280}}>
-
+                    <Content style={{padding: '0 24px', minHeight: 280, overflow: 'initial'}}>
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='/profile/:userId?' render={() => <ProfilePage/>}/>
                         <Route path='/users' render={() => <UsersPage/>}/>
-
-
                     </Content>
                 </Layout>
             </Content>
-            <Footer style={{textAlign: 'center'}}>FOOTER</Footer>
+
         </Layout>
     );
 }

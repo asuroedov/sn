@@ -10,7 +10,6 @@ import s from './profilePage.module.css'
 
 const ProfilePage: React.FC = () => {
 
-    debugger
     const dispatch = useDispatch()
     const history = useHistory()
     const params = useParams<{ userId: string | undefined }>()
