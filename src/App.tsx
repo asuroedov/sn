@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "./data/store";
 import {initializeTC} from "./data/init-reducer";
 import {logoutTC} from "./data/auth-reducer";
+import UsersPage from "./users/usersPage";
 
 const {Header, Content, Sider, Footer} = Layout;
 
@@ -53,6 +54,7 @@ function App() {
 
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='/profile/:userId?' render={() => <ProfilePage/>}/>
+                        <Route path='/users' render={() => <UsersPage/>}/>
 
 
                     </Content>
