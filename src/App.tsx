@@ -45,7 +45,7 @@ function App() {
                             <Menu.Item key="1"><NavLink to={'/profile'}>Профиль</NavLink></Menu.Item>
                             <Menu.Item key="2">Сообщения</Menu.Item>
                             <Menu.Item key="3">Друзья</Menu.Item>
-                            <Menu.Item key="4">Пользователи</Menu.Item>
+                            <Menu.Item key="4"><NavLink to={'/users'}>Пользователи</NavLink></Menu.Item>
                             <Menu.Item key="5"><NavLink to={'/login'}>Login</NavLink></Menu.Item>
                             <Menu.Item key="6" onClick={(e) => {dispatch(logoutTC())}}><NavLink to={'/login'}>Logout</NavLink></Menu.Item>
                         </Menu>
