@@ -6,8 +6,10 @@ import {ResponseCodes} from "../api/api";
 const initState = {
     userId: null as null | number,
     login: null as null | string,
+    name: "Алексей",
     photoUrl: '',
-    status: null as null | string,
+    status: 'status',
+    location: 'Rostov',
     lastSeanceDate: null as null | Date,
     posts: [] as Array<ProfilePostType>
 

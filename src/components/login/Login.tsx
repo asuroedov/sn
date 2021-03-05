@@ -25,7 +25,7 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const onFinish = (values: FormDataType) => {
-        dispatch(loginTC(values.login, values.password, values.name))
+        dispatch(loginTC(values.login, values.password))
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -58,13 +58,6 @@ const Login = () => {
                 <Input.Password/>
             </Form.Item>
 
-            <Form.Item
-                label="Отображаемое имя"
-                name="name"
-                rules={[{required: true, message: 'Please input your name!'}]}
-            >
-                <Input/>
-            </Form.Item>
 
             <Form.Item {...tailLayout} name="remember" valuePropName="checked">
                 <Checkbox>Remember me</Checkbox>

@@ -4,7 +4,7 @@ import s from './ProfileInfo.module.css'
 type PropsType = {
     name: string
     status: string
-    lastSeanceDate: string
+    lastSeanceDate: Date | null
     location: string
 
 }
