@@ -14,8 +14,9 @@ const tailLayout = {
 };
 
 type FormDataType = {
-    username: string
+    login: string
     password: string
+    name: string
     remember: boolean
 }
 const Login = () => {
@@ -24,7 +25,7 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const onFinish = (values: FormDataType) => {
-        dispatch(loginTC(values.username, values.password))
+        dispatch(loginTC(values.login, values.password, values.name))
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -42,8 +43,8 @@ const Login = () => {
             onFinishFailed={onFinishFailed}
         >
             <Form.Item
-                label="Username"
-                name="username"
+                label="Login"
+                name="login"
                 rules={[{required: true, message: 'Please input your username!'}]}
             >
                 <Input/>
@@ -55,6 +56,14 @@ const Login = () => {
                 rules={[{required: true, message: 'Please input your password!'}]}
             >
                 <Input.Password/>
+            </Form.Item>
+
+            <Form.Item
+                label="Отображаемое имя"
+                name="name"
+                rules={[{required: true, message: 'Please input your name!'}]}
+            >
+                <Input/>
             </Form.Item>
 
             <Form.Item {...tailLayout} name="remember" valuePropName="checked">
