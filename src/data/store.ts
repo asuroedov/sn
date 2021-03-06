@@ -3,11 +3,13 @@ import authReducer from "./auth-reducer";
 import middleware, {ThunkAction} from 'redux-thunk'
 import initReducer from "./init-reducer";
 import profileReducer from "./profile-reducer";
+import userReducer from "./user-reducer";
 
 const globalReducer = combineReducers({
     auth: authReducer,
     init: initReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    users: userReducer
 });
 
 

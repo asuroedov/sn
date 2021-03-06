@@ -33,9 +33,9 @@ export const actions = {
     setAuthDate: (data: InitialStateType) => ({type: 'auth-reducer/setAuthDate', data} as const)
 }
 
-export const loginTC = (login: string, password: string, name: string): CommonThunkType<ActionsType> => {
+export const loginTC = (login: string, password: string): CommonThunkType<ActionsType> => {
     return async (dispatch) => {
-        const response = await AuthAPI.login(login, password, name)
+        const response = await AuthAPI.login(login, password)
         if (response.data.resultCode === ResponseCodes.Success) {
             dispatch(actions.setAuthDate({userId: response.data.data.userId, login: response.data.data.login, token: response.data.data.token,  isAuth: true}))
             localStorage.setItem('token', response.data.data.token)

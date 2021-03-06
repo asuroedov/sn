@@ -4,7 +4,7 @@ import s from './ProfileInfo.module.css'
 type PropsType = {
     name: string
     status: string
-    lastSeanceDate: string
+    lastSeanceDate: Date | null
     location: string
 
 }
@@ -18,6 +18,7 @@ const ProfileInfo:React.FC<PropsType> = (props) => {
             <div className={s.container__item__location}>
                 Город: {props.location}
             </div>
+
         </div>
     )
 }
