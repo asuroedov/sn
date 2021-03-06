@@ -31,6 +31,7 @@ const Avatar: React.FC<{photoUrl: string}> = (props) => {
                     className={s.image}
                     width={250}
                     height={250}
+
                     src={props.photoUrl ? BASE_URL + props.photoUrl : defaultAvatarImg}
                 />
                 <div ref={refWrapperMenu} className={s.wrapperMenu}>

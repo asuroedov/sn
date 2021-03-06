@@ -18,6 +18,7 @@ const ProfileInfo:React.FC<PropsType> = (props) => {
             <div className={s.container__item__location}>
                 Город: {props.location}
             </div>
+
         </div>
     )
 }

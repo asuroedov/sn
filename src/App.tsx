@@ -23,7 +23,7 @@ function App() {
     if(!isInit) return (<div>Loading...</div>)
 
     return (
-        <Layout >
+        <Layout>
 
             <Header style={{backgroundColor: 'white'}}>
                 <div className="logo"/>
