@@ -1,6 +1,7 @@
 import {CommonThunkType, InferActionsTypes} from "./store";
 import {userAPI, UserType} from "../api/user";
 import {ResponseCodes} from "../api/api";
+import {bindReporter} from "web-vitals/dist/modules/lib/bindReporter";
 
 const initialState = {
     users: [] as Array<UserType>,
@@ -18,6 +19,9 @@ const userReducer = (state = initialState, action: ActionsType):InitialStateType
             return {...state, totalCount: action.totalCount, users: [...action.users]}
             break
 
+        case "user-reducer/SET_CURRENT_PAGE":
+            return {...state, currentPage: action.current}
+            break
         default:
             return state
     }
@@ -25,7 +29,8 @@ const userReducer = (state = initialState, action: ActionsType):InitialStateType
 }
 
 const actions = {
-    setUsers: (totalCount: number, users: Array<UserType>) => ({type: 'user-reducer/SET_USERS', totalCount, users} as const)
+    setUsers: (totalCount: number, users: Array<UserType>) => ({type: 'user-reducer/SET_USERS', totalCount, users} as const),
+    setCurrentPage: (current: number) => ({type: 'user-reducer/SET_CURRENT_PAGE', current} as const)
 }
 
 export const getUsersTC =  (pageSize: number, pageNumber: number, queryLine: string): CommonThunkType<ActionsType> => {
@@ -33,6 +38,7 @@ export const getUsersTC =  (pageSize: number, pageNumber: number, queryLine: str
         const response = await userAPI.getUsers(pageSize, pageNumber, queryLine)
         if(response.data.resultCode === ResponseCodes.Success){
             dispatch(actions.setUsers(response.data.data.totalCount, response.data.data.users))
+            dispatch(actions.setCurrentPage(pageNumber))
         }
     }
 }
