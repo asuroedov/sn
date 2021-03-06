@@ -15,7 +15,7 @@ type ActionsType = InferActionsTypes<typeof actions>
 const userReducer = (state = initialState, action: ActionsType):InitialStateType => {
     switch (action.type) {
         case 'user-reducer/SET_USERS':
-            return {...state, users: [...action.users]}
+            return {...state, totalCount: action.totalCount, users: [...action.users]}
             break
 
         default:
@@ -25,14 +25,14 @@ const userReducer = (state = initialState, action: ActionsType):InitialStateType
 }
 
 const actions = {
-    setUsers: (users: Array<UserType>) => ({type: 'user-reducer/SET_USERS', users} as const)
+    setUsers: (totalCount: number, users: Array<UserType>) => ({type: 'user-reducer/SET_USERS', totalCount, users} as const)
 }
 
 export const getUsersTC =  (pageSize: number, pageNumber: number, queryLine: string): CommonThunkType<ActionsType> => {
     return async (dispatch) => {
         const response = await userAPI.getUsers(pageSize, pageNumber, queryLine)
         if(response.data.resultCode === ResponseCodes.Success){
-            dispatch(actions.setUsers(response.data.data.users))
+            dispatch(actions.setUsers(response.data.data.totalCount, response.data.data.users))
         }
     }
 }
