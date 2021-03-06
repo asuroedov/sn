@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+
+    margin-bottom: 20px;
+}
+
+.wrapper{
+    flex-grow: 1;
+}
+
+.imgWrapper img{
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+
+.wrapper{
+
+}
+
+.nameDate{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+
+}
+
+.name{
+
+}
+
+.date{
+    padding-right: 20px;
+}
+
+.message{
+    padding: 5px;
+}
+

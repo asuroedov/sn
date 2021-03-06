@@ -1,0 +1,7 @@
+.container {
+    border: black 2px solid;
+}
+
+.container{
+    max-width: 300px;
+}

@@ -10,6 +10,7 @@ import {AppStateType} from "./data/store";
 import {initializeTC} from "./data/init-reducer";
 import {logoutTC} from "./data/auth-reducer";
 import UsersPage from "./users/usersPage";
+import DialogsPage from "./components/dialogs/DialogsPage";
 
 const {Header, Content, Sider, Footer} = Layout;
 
@@ -42,7 +43,7 @@ function App() {
                             style={{height: '325px', backgroundColor: 'white'}}
                         >
                             <Menu.Item key="1"><NavLink to={'/profile'}>Профиль</NavLink></Menu.Item>
-                            <Menu.Item key="2">Сообщения</Menu.Item>
+                            <Menu.Item key="2"><NavLink to={'/dialogs'}>Сообщения</NavLink></Menu.Item>
                             <Menu.Item key="3">Друзья</Menu.Item>
                             <Menu.Item key="4"><NavLink to={'/users'}>Пользователи</NavLink></Menu.Item>
                             <Menu.Item key="5"><NavLink to={'/login'}>Login</NavLink></Menu.Item>
@@ -55,6 +56,7 @@ function App() {
                         <Route exact path='/profile' render={() => <ProfilePage/>}/>
                         <Route path='/profile/:userId' render={() => <ProfilePage/>}/>
                         <Route path='/users' render={() => <UsersPage/>}/>
+                        <Route path='/dialogs' render={() => <DialogsPage/>}/>
                     </Content>
                 </Layout>
             </Content>
