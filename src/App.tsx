@@ -50,8 +50,10 @@ function App() {
                         </Menu>
                     </Sider>
                     <Content style={{padding: '0 24px', minHeight: 280, overflow: 'initial'}}>
+
                         <Route path='/login' render={() => <Login/>}/>
-                        <Route path='/profile/:userId?' render={() => <ProfilePage/>}/>
+                        <Route exact path='/profile' render={() => <ProfilePage/>}/>
+                        <Route path='/profile/:userId' render={() => <ProfilePage/>}/>
                         <Route path='/users' render={() => <UsersPage/>}/>
                     </Content>
                 </Layout>

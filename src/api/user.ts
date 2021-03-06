@@ -2,6 +2,7 @@ import axios from "axios";
 import {BASE_URL} from "./api";
 
 export type UserType = {
+    login: string
     name: string
     shortName: string
     photoUrl: string

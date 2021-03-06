@@ -5,15 +5,17 @@ import defaultUserImg from '../user.png'
 import s from './user.module.css'
 
 type PropsType = {
+    login: string
     photoUrl: string
     name: string
     shortName: string
     userId: number
 }
-const User:React.FC<PropsType> = ({photoUrl, name, shortName, userId}) => {
+const User:React.FC<PropsType> = ({login, photoUrl, name, shortName, userId}) => {
     return(
         <div className={s.container}>
             <div><NavLink to={'/profile/' + userId}><img src={photoUrl ? BASE_URL + photoUrl : defaultUserImg}/></NavLink></div>
+            <div>{'login: ' + login}</div>
             <div>{'name: ' + name }</div>
             <div>{'short name: ' + shortName }</div>
         </div>
