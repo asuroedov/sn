@@ -11,17 +11,26 @@ import {initializeTC} from "./data/init-reducer";
 import {logoutTC} from "./data/auth-reducer";
 import UsersPage from "./users/usersPage";
 import DialogsPage from "./components/dialogs/DialogsPage";
+import {io, Socket} from "socket.io-client";
 
 const {Header, Content, Sider, Footer} = Layout;
+
+export let socket: Socket;
 
 function App() {
 
     const dispatch = useDispatch()
     dispatch(initializeTC())
     const isInit = useSelector((state: AppStateType) => state.init.isInit)
+    const userId = useSelector((state: AppStateType) => state.auth.userId)
 
 
     if(!isInit) return (<div>Loading...</div>)
+
+    if(!socket){
+        socket = io(`ws://localhost:5000?userId=${userId}`)
+    }
+
 
     return (
         <Layout>

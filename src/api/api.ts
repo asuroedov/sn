@@ -13,6 +13,12 @@ export enum ResponseCodes{
     Error = 1
 }
 
+export type CommonResponseType<D> = {
+    resultCode: number
+    message: string
+    data: D
+}
+
 export let TOKEN = null as string | null
 export const setTOKEN = (token: string) => (TOKEN = token)
 

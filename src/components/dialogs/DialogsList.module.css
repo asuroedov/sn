@@ -1,7 +1,9 @@
 .container {
     border: black 2px solid;
-}
-
-.container{
     max-width: 300px;
 }
+
+.dialogsList{
+    padding: 30px 0 0 10px;
+}
+
