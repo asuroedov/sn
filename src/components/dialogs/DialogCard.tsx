@@ -3,6 +3,8 @@ import s from './DialogCard.module.css'
 import defaultImage from '../../user.png'
 import {BASE_URL, TOKEN} from "../../api/api";
 import {socket} from "../../App";
+import {useDispatch} from "react-redux";
+import {actions} from "../../data/dialogs-reducer";
 
 type PropsType = {
     photoUrl?: string
@@ -14,7 +16,10 @@ type PropsType = {
 
 const DialogCard: React.FC<PropsType> = ({userId, name, photoUrl, message}) => {
 
+    const dispatch = useDispatch()
+
     const dialogsSelected = (e: any) => {
+        dispatch(actions.setCurrentDialog(userId))
         socket.emit('MESSAGE:GET', TOKEN, userId)
     }
 

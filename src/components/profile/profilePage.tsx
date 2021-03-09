@@ -6,6 +6,8 @@ import {getProfileInfoTC} from "../../data/profile-reducer";
 import Avatar from "./Avatar";
 import ProfileInfo from "./ProfileInfo";
 import s from './profilePage.module.css'
+import Button from "antd/lib/button/button";
+import {actions} from "../../data/dialogs-reducer";
 
 
 const ProfilePage: React.FC = () => {
@@ -39,12 +41,19 @@ const ProfilePage: React.FC = () => {
     const location = useSelector((state: AppStateType) => state.profile.location)
 
 
+    const onSendMessage = () => {
+        //переходим на сообщения
+        //устанавливаем current = id
+        if (userId) dispatch(actions.setCurrentDialog(userId))
+
+    }
+
     return (
         <div className={s.container}>
 
             <Avatar photoUrl={photoUrl}></Avatar>
             <ProfileInfo status={status} name={name} lastSeanceDate={lastSeanceDate} location={location}></ProfileInfo>
-
+            <Button onClick={onSendMessage}>SEND MESSAGE</Button>
 
         </div>
     )

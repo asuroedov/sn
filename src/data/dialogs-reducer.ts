@@ -6,7 +6,8 @@ import {MessageType} from "../types";
 const initialState = {
     dialogs: [] as Array<UserType>,
     messages: [] as Array<MessageType>,
-    currentDialog: null as null | number
+    //currentDialog: null as null | number
+    currentDialog: 2
 }
 
 export type InitialStateType = typeof initialState
@@ -22,6 +23,11 @@ const dialogsReducer = (state = initialState, action: ActionsType):InitialStateT
         case "dialogs-reducer/SET_MESSAGES":
             return {...state, messages: [...action.messages]}
             break
+
+        case "dialogs-reducer/SET_CURRENT_DIALOG":
+            return {...state, currentDialog: action.userId}
+            break
+
         default:
             return state
             break
@@ -31,7 +37,8 @@ const dialogsReducer = (state = initialState, action: ActionsType):InitialStateT
 
 export const actions = {
     setDialogs: (users: Array<UserType>) => ({type: 'dialogs-reducer/SET_DIALOGS', users} as const),
-    setMessages: (to: number, messages: Array<MessageType>) => ({type: 'dialogs-reducer/SET_MESSAGES', to, messages} as const)
+    setMessages: (to: number, messages: Array<MessageType>) => ({type: 'dialogs-reducer/SET_MESSAGES', to, messages} as const),
+    setCurrentDialog: (userId: number) => ({type: 'dialogs-reducer/SET_CURRENT_DIALOG', userId} as const)
 }
 
 
