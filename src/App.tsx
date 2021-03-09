@@ -10,17 +10,27 @@ import {AppStateType} from "./data/store";
 import {initializeTC} from "./data/init-reducer";
 import {logoutTC} from "./data/auth-reducer";
 import UsersPage from "./users/usersPage";
+import DialogsPage from "./components/dialogs/DialogsPage";
+import {io, Socket} from "socket.io-client";
 
 const {Header, Content, Sider, Footer} = Layout;
+
+export let socket: Socket;
 
 function App() {
 
     const dispatch = useDispatch()
     dispatch(initializeTC())
     const isInit = useSelector((state: AppStateType) => state.init.isInit)
+    const userId = useSelector((state: AppStateType) => state.auth.userId)
 
 
     if(!isInit) return (<div>Loading...</div>)
+
+    if(!socket){
+        socket = io(`ws://localhost:5000?userId=${userId}`)
+    }
+
 
     return (
         <Layout>
@@ -42,7 +52,7 @@ function App() {
                             style={{height: '325px', backgroundColor: 'white'}}
                         >
                             <Menu.Item key="1"><NavLink to={'/profile'}>Профиль</NavLink></Menu.Item>
-                            <Menu.Item key="2">Сообщения</Menu.Item>
+                            <Menu.Item key="2"><NavLink to={'/dialogs'}>Сообщения</NavLink></Menu.Item>
                             <Menu.Item key="3">Друзья</Menu.Item>
                             <Menu.Item key="4"><NavLink to={'/users'}>Пользователи</NavLink></Menu.Item>
                             <Menu.Item key="5"><NavLink to={'/login'}>Login</NavLink></Menu.Item>
@@ -55,6 +65,7 @@ function App() {
                         <Route exact path='/profile' render={() => <ProfilePage/>}/>
                         <Route path='/profile/:userId' render={() => <ProfilePage/>}/>
                         <Route path='/users' render={() => <UsersPage/>}/>
+                        <Route path='/dialogs' render={() => <DialogsPage/>}/>
                     </Content>
                 </Layout>
             </Content>
