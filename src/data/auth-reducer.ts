@@ -44,6 +44,15 @@ export const loginTC = (login: string, password: string): CommonThunkType<Action
     }
 }
 
+export const registrationTC = (login: string, password: string, name:string): CommonThunkType<ActionsType> => {
+    return async (dispatch) => {
+        const response = await AuthAPI.registration(login, password, name)
+        if (response.data.resultCode === ResponseCodes.Success) {
+
+        }
+    }
+}
+
 export const getUserDataTC = (token: string): CommonThunkType<ActionsType> => {
     return async (dispatch) => {
         const response = await AuthAPI.me(token)

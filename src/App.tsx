@@ -12,6 +12,7 @@ import {logoutTC} from "./data/auth-reducer";
 import UsersPage from "./users/usersPage";
 import DialogsPage from "./components/dialogs/DialogsPage";
 import {io, Socket} from "socket.io-client";
+import Registration from "./components/login/Registration";
 
 const {Header, Content, Sider, Footer} = Layout;
 
@@ -56,7 +57,8 @@ function App() {
                             <Menu.Item key="3">Друзья</Menu.Item>
                             <Menu.Item key="4"><NavLink to={'/users'}>Пользователи</NavLink></Menu.Item>
                             <Menu.Item key="5"><NavLink to={'/login'}>Login</NavLink></Menu.Item>
-                            <Menu.Item key="6" onClick={(e) => {dispatch(logoutTC())}}><NavLink to={'/login'}>Logout</NavLink></Menu.Item>
+                            <Menu.Item key="6"><NavLink to={'/registration'}>Reg</NavLink></Menu.Item>
+                            <Menu.Item key="7" onClick={(e) => {dispatch(logoutTC())}}><NavLink to={'/login'}>Logout</NavLink></Menu.Item>
                         </Menu>
                     </Sider>
                     <Content style={{padding: '0 24px', minHeight: 280, overflow: 'initial'}}>
@@ -66,6 +68,7 @@ function App() {
                         <Route path='/profile/:userId' render={() => <ProfilePage/>}/>
                         <Route path='/users' render={() => <UsersPage/>}/>
                         <Route path='/dialogs' render={() => <DialogsPage/>}/>
+                        <Route path='/registration' render={() => <Registration/>}/>
                     </Content>
                 </Layout>
             </Content>

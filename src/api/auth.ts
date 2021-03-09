@@ -1,4 +1,4 @@
-import {BASE_URL, TOKEN} from "./api";
+import {BASE_URL, CommonResponseType, TOKEN} from "./api";
 import axios from "axios";
 
 type LoginResponseType = {
@@ -18,8 +18,8 @@ type DeleteResponseType = {
 }
 
 export const AuthAPI = {
-    registration: () => {
-        return 42
+    registration: (login: string, password: string, name: string) => {
+        return axios.post<CommonResponseType<{}>>(BASE_URL + `/registration`, {login, password, name})
     },
     login: (login: string, password: string) => {
         return axios.post<LoginResponseType>(BASE_URL + `/login`, {login, password})
